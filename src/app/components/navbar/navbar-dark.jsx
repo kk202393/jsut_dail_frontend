@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { handleSuccess, handleError } from "../../utils/Utils";
 
 import {
   BsPersonCircle,
@@ -48,8 +49,15 @@ export default function NavbarDark() {
   const [toggle, setIsToggle] = useState(false);
   const dispatch = useDispatch();
   const location = usePathname();
-
   const router = useRouter();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleForgotPassword = (e) => {
     e.preventDefault();
@@ -61,25 +69,26 @@ export default function NavbarDark() {
 
   const userLogin = async (e) => {
     e.preventDefault();
-    console.log("login click");
-
     try {
       dispatch(
         loginUserAsync({
-          email: "kailash.lodhi@gmail.com",
-          password: "password",
+          email: formData.email,
+          password: formData.password,
         })
       ).then((result) => {
-        console.log("result", result);
-        // ✅ Now check safely
-        //   if (result?.success) {
-        //     console.log("Login success!");
-        //   } else {
-        //     console.log("Login failed", result);
-        //   }
+        console.log("res", result);
+        if (result.payload.success) {
+          handleSuccess(result.payload.message);
+          setTimeout(() => {
+            router.push("/");
+          }, 2000);
+        } else {
+          handleError(result.payload);
+        }
       });
     } catch (error) {
       console.error("Login error:", error);
+      handleError("Login error");
     }
   };
 
@@ -1017,7 +1026,10 @@ export default function NavbarDark() {
                   </label>
                   <input
                     type="email"
+                    name="email"
                     className="form-control"
+                    value={formData.email}
+                    onChange={handleChange}
                     id="email01"
                     placeholder="email@site.com"
                     required
@@ -1043,6 +1055,9 @@ export default function NavbarDark() {
                   <div className="input-group-merge form-group form-border ">
                     <input
                       type="password"
+                      name="password"
+                      value={formData.password}
+                      onChange={handleChange}
                       className="form-control"
                       id="pass01"
                       placeholder="8+ characters required"

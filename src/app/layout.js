@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./style/scss/style.scss";
 import "animate.css/animate.css";
 import {Providers}  from '../redux/provider/Providers';
+import ToastProvider from "../app/utils/ToastProvider";
 
 export const metadata = {
   title: "ListingHub - Next Js Business Directory & Listing Template",
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className={``}>
         <Providers>{children}</Providers>
+        <ToastProvider />
       </body>
     </html>
   );

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { loginUser } from "../api_services/login_services";
+import { loginUser , registerUser} from "../api_services/login_services";
 
 // You can use this object if needed elsewhere:
 interface AuthState {
@@ -31,7 +31,25 @@ export const loginUserAsync = createAsyncThunk(
     { rejectWithValue, fulfillWithValue }
   ) => {
     try {
-      const response: any = loginUser({ email, password });
+      const response: any = await loginUser({ email, password });
+      if (!response.success) {
+        return rejectWithValue(response.data.message || "Login failed");
+      }
+      return fulfillWithValue(response);
+    } catch (err: any) {
+      return rejectWithValue(err.message || "An error occurred");
+    }
+  }
+);
+
+export const registerUserAsync = createAsyncThunk(
+  "user/registerUser",
+  async (
+    { email, password }: { email: string; password: string },
+    { rejectWithValue, fulfillWithValue }
+  ) => {
+    try {
+      const response: any = await registerUser({ email, password });
       if (!response.success) {
         return rejectWithValue(response.message || "Login failed");
       }
@@ -41,6 +59,7 @@ export const loginUserAsync = createAsyncThunk(
     }
   }
 );
+
 
 const authSlice = createSlice({
   name: "auth",

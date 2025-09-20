@@ -76,11 +76,12 @@ export default function NavbarDark() {
           password: formData.password,
         })
       ).then((result) => {
-        console.log("res", result);
         if (result.payload.success) {
           handleSuccess(result.payload.message);
           setTimeout(() => {
-            router.push("/");
+            const modalEl = document.getElementById("login");
+            const modal = bootstrap.Modal.getInstance(modalEl);
+            modal?.hide();
           }, 2000);
         } else {
           handleError(result.payload);

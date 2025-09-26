@@ -1,13 +1,14 @@
 {
-  "name": "listinghub",
+  "name": "just_dail",
   "version": "1.0.0",
-  "description": "ListingHub - Next Js Business Directory & Listing Template",
+  "description": "just_dail - Next Js Business Directory & Listing Template",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next export"
   },
   "dependencies": {
     "@react-google-maps/api": "^2.20.6",

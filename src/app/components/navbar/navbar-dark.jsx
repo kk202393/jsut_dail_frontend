@@ -215,7 +215,7 @@ export default function NavbarDark() {
               >
                 ✕
               </span>
-              <ul className="nav-menu">
+              {/* <ul className="nav-menu">
                 <li
                   className={`${
                     [
@@ -923,7 +923,7 @@ export default function NavbarDark() {
                     Add Listing
                   </Link>
                 </li>
-              </ul>
+              </ul> */}
 
               <ul className="nav-menu nav-menu-social align-to-right">
                 <li>

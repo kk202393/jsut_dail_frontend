@@ -13,18 +13,51 @@ export default function Register() {
   const dispatch = useDispatch();
   const router = useRouter();
   const [formData, setFormData] = useState({
+    first_name: "",
     email: "",
+    phone_number: "",
     password: "",
     confirm_password: "",
+    role: "customer",
   });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const validateForm = () => {
+    // Validate first name - no numbers, required
+    if (!formData.first_name.trim()) {
+      handleError("First name is required");
+      return false;
+    }
+    if (/\d/.test(formData.first_name)) {
+      handleError("First name should not contain numbers");
+      return false;
+    }
+
+    // Validate phone number - exactly 10 digits
+    if (!/^\d{10}$/.test(formData.phone_number)) {
+      handleError("Phone number must be exactly 10 digits");
+      return false;
+    }
+
+    // Validate role is selected
+    if (!formData.role) {
+      handleError("Please select a role");
+      return false;
+    }
+
+    return true;
+  };
+
   const userRegistration = (e) => {
     try {
       e.preventDefault();
+
+      if (!validateForm()) {
+        return;
+      }
 
       if (formData.password !== formData.confirm_password) {
         handleError("Password and Confirm password Must be same");
@@ -32,8 +65,11 @@ export default function Register() {
       }
       dispatch(
         registerUserAsync({
+          first_name: formData.first_name,
           email: formData.email,
+          phone_number: formData.phone_number,
           password: formData.password,
+          role: formData.role,
         })
       ).then((result) => {
         if (result.payload.success) {
@@ -92,6 +128,18 @@ export default function Register() {
                     >
                       <div className="form mb-5">
                         <div className="form-group form-border">
+                          <label className="form-label">First Name</label>
+                          <input
+                            type="text"
+                            required="true"
+                            value={formData.first_name}
+                            onChange={handleChange}
+                            name="first_name"
+                            className="form-control"
+                            placeholder="Enter your first name"
+                          />
+                        </div>
+                        <div className="form-group form-border">
                           <label className="form-label">User or Email</label>
                           <input
                             type="email"
@@ -101,6 +149,19 @@ export default function Register() {
                             name="email"
                             className="form-control"
                             placeholder="name@example.com"
+                          />
+                        </div>
+                        <div className="form-group form-border">
+                          <label className="form-label">Phone Number</label>
+                          <input
+                            type="tel"
+                            required="true"
+                            value={formData.phone_number}
+                            onChange={handleChange}
+                            name="phone_number"
+                            className="form-control"
+                            placeholder="Enter 10 digit phone number"
+                            maxLength="10"
                           />
                         </div>
                         <div className="form-group form-border">
@@ -131,6 +192,23 @@ export default function Register() {
                             onChange={handleChange}
                             placeholder="*********"
                           />
+                        </div>
+
+                        <div className="form-group form-border">
+                          <label className="form-label">Who are you?</label>
+                          <select
+                            required="true"
+                            value={formData.role}
+                            onChange={handleChange}
+                            name="role"
+                            className="form-control"
+                          >
+                            <option value="customer">Customer</option>
+                            <option value="business_owner">
+                              Business Owner
+                            </option>
+                            <option value="admin">Admin</option>
+                          </select>
                         </div>
 
                         <div className="form-group mb-4">

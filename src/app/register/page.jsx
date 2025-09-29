@@ -75,7 +75,12 @@ export default function Register() {
         if (result.payload.success) {
           handleSuccess(result.payload.message);
           setTimeout(() => {
-            router.push("/login");
+            // Check if user is business owner to redirect to business info form
+            if (formData.role === "business_owner") {
+              router.push("/register/business-info");
+            } else {
+              router.push("/login");
+            }
           }, 2000);
         } else {
           handleError(result.payload);

@@ -15,7 +15,7 @@ export default function Footer() {
                     <div className="col-12 col-md-5 col-lg-12 col-xl-4">
                         <div className="footer-widget pe-xl-4 mb-5">
                             <div className="footerLogo"><Image src='/img/logo-light.svg' width={0} height={0} sizes='100vw' style={{width:'160px', height:'auto'}} className="img-fluid"  alt="Footer Logo"/></div>
-                            <div className="footerText"><p>© {new Date().getFullYear()} ListingHub. Develop with <FaHeart className="ms-1 text-danger"></FaHeart>  By Shreethemes</p></div>
+                            <div className="footerText"><p>© {new Date().getFullYear()} Narayan Group <FaHeart className="ms-1 text-danger"></FaHeart></p></div>
                             <div className="footerSocialwrap">
                                 <ul className="footersocial">
                                     <li><Link href="#" className="social-link"><FaFacebookF className=""/></Link></li>
@@ -74,7 +74,7 @@ export default function Footer() {
                                 <div className="singleinfo">
                                     <div className="icons"><BsGeoAltFill className=""/></div>
                                     <div className="caps">
-                                        <h5 className="title">Angraster 7, Greenhorst<br/>Los Angeles QTC564</h5>
+                                        <h5 className="title">B-14, Sector-62<br/> Noida</h5>
                                         <p className="subs">Reach Us</p>											
                                     </div>
                                 </div>
@@ -82,7 +82,7 @@ export default function Footer() {
                                 <div className="singleinfo">
                                     <div className="icons"><BsTelephoneOutbound className=""/></div>
                                     <div className="caps">
-                                        <h5 className="title">042 - 526 - 5263</h5>
+                                        <h5 className="title">8851202312</h5>
                                         <p className="subs">Mon - Sat 10am - 6PM</p>											
                                     </div>
                                 </div>

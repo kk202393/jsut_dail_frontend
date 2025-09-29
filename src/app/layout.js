@@ -5,8 +5,8 @@ import {Providers}  from '../redux/provider/Providers';
 import ToastProvider from "../app/utils/ToastProvider";
 
 export const metadata = {
-  title: "ListingHub - Next Js Business Directory & Listing Template",
-  description: "ListingHub - Next Js Business Directory & Listing Template",
+  title: "Narayan Group",
+  description: "Listing Your Product Here",
 };
 
 export default function RootLayout({ children }) {
